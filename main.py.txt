@@ -1,0 +1,180 @@
+from user import user
+from wallet import transfer
+from database import load_users,save_users 
+
+users = load_users()
+
+def signup():
+    username = input ("Enter username : ")
+    password = input ("Enter password : ")
+    balance = float(input("Enter initial balance : "))
+    if username in users :
+       print ("user already exists")
+    else:
+        users[username]={
+       "password" : password , 
+       "balance" : balance
+        save_users(users)
+     print("Account created successfully ! ")
+       }
+   
+
+def deposit(username):
+       amount = float(input("Enter amount to deposit: "))
+       if amount <=0:
+        print ("Invalid amount !")
+        return
+       users[username]["balance"]+=amount
+       save_users(users)
+       Print("Deposit successful !")
+
+def withdraw(username):
+    amount = float(input("Enter amount to withdraw: "))
+    if amount <=0:
+        print ("Invalid amount !")
+        return
+    if users[username]["balance"]>=amount:
+        users[username]["balance"] -=amount 
+        print ("withdraw successful!")
+        save_users(users)
+    else:
+        print ("Insufficient balance !")
+
+
+def transfer(username):
+    receiver = input ("Enter receiver username : ")
+    amount = float(input("Enter amount to transfer: "))
+    if receiver not in users:
+        print ("Receiver not found !")
+        return
+    if amount <=0:
+    print ("Invalid amount !")
+    return
+    if users[username]["balance"]<amount:
+    print ("Insufficient balance !")
+    return
+    users[username]["balance"] -= amount
+    users[receiver]["balance"] += amount
+    save_users(users)
+    print("transfer successful !")
+    
+    
+
+
+ def dashboard(username):
+     while True:
+         print ("Username: ", username )
+         print ("Balance:",users[username]["balance"])
+         print ("Choose an option : " )
+         print ("1. Deposit")
+         print ("2. Withdraw")
+         print ("3. Transfer")
+         print ("4. Logout")
+
+         choice = input ("Enter your choice: ")
+         if choice == "1":
+            deposite (username)
+         elif choice == "2":
+            withdraw (username)
+         elif choice == "3":
+            transfer (username)
+         elif choice == "4":
+            print ("logging out...")
+            break
+         else:
+             print("Invalid choice!")
+
+
+def main ():
+    while True
+      print ("\nDigital Wallet ")
+      print ("1 .sign up")
+      print ("2. log in")
+      print ("3. exit")
+      Choice =input ("choose an option: ")
+if choice == "1" :
+    signup() 
+ elif choice == "2" :
+    login()
+ elif choice == "3" :
+    print ("Goodbyee !")
+    break 
+else:
+    print ("Invalid choise !")
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
